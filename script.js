@@ -1135,11 +1135,7 @@ function generateAIResponse(userMessage) {
 // DOWNLOAD RESUME
 // ===================================
 
-const downloadResume = document.getElementById('downloadResume');
-downloadResume.addEventListener('click', (e) => {
-    e.preventDefault();
-    alert('Resume download functionality will be implemented. Please contact aneeshjayan11@gmail.com for the latest resume.');
-});
+// Resume download is handled via the anchor href in index.html
 
 // ===================================
 // CHAT WITH AI BUTTON
