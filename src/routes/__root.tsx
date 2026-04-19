@@ -1,6 +1,4 @@
-import { Outlet, Link, createRootRoute, HeadContent, Scripts } from "@tanstack/react-router";
-
-import appCss from "../styles.css?url";
+import { Outlet, Link, createRootRoute } from "@tanstack/react-router";
 import { Nav } from "@/components/Nav";
 import { Footer } from "@/components/Footer";
 import { MathBackground } from "@/components/MathBackground";
@@ -28,49 +26,9 @@ function NotFoundComponent() {
 }
 
 export const Route = createRootRoute({
-  head: () => ({
-    meta: [
-      { charSet: "utf-8" },
-      { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { title: "Aneesh Jayan Prabhu — AI/ML Engineer" },
-      {
-        name: "description",
-        content:
-          "Aneesh Jayan Prabhu — AI/ML engineer building agentic systems, RAG pipelines, and production ML. MS Data Science @ ASU.",
-      },
-      { name: "author", content: "Aneesh Jayan Prabhu" },
-      { property: "og:title", content: "Aneesh Jayan Prabhu — AI/ML Engineer" },
-      {
-        property: "og:description",
-        content:
-          "Portfolio of Aneesh Jayan Prabhu — agentic systems, RAG, GNNs, and production ML.",
-      },
-      { property: "og:type", content: "website" },
-      { name: "twitter:card", content: "summary" },
-    ],
-    links: [
-      { rel: "stylesheet", href: appCss },
-      { rel: "icon", href: "/favicon.ico" },
-    ],
-  }),
-  shellComponent: RootShell,
   component: RootComponent,
   notFoundComponent: NotFoundComponent,
 });
-
-function RootShell({ children }: { children: React.ReactNode }) {
-  return (
-    <html lang="en" className="dark">
-      <head>
-        <HeadContent />
-      </head>
-      <body>
-        {children}
-        <Scripts />
-      </body>
-    </html>
-  );
-}
 
 function RootComponent() {
   return (
