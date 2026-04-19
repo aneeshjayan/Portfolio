@@ -9,13 +9,13 @@ export const Route = createFileRoute("/projects")({
       {
         name: "description",
         content:
-          "Selected AI/ML projects: Optimal-SLM (small language model RL), FraudGNN (graph fraud detection), TrustMedAI (trust-calibrated medical AI).",
+          "Selected AI/ML projects: Optimal-SLM, FraudGNN, TrustMedAI, VoiceGuardAI (RL voice deepfake detection), Insurance SLM Agent (multi-agent RLHF pipeline).",
       },
       { property: "og:title", content: "Projects — Aneesh Jayan Prabhu" },
       {
         property: "og:description",
         content:
-          "Optimal-SLM, FraudGNN, TrustMedAI — selected work in LLMs, GNNs, and trustworthy AI.",
+          "Optimal-SLM, FraudGNN, TrustMedAI, VoiceGuardAI, Insurance SLM Agent — selected work in LLMs, GNNs, RL, and trustworthy AI.",
       },
     ],
   }),
@@ -72,6 +72,97 @@ const projects: Project[] = [
     ],
     github: "https://github.com/aneeshjayan",
   },
+  {
+    name: "VLM Speedup: LexFin Guard",
+    blurb: "Vision-language model acceleration for financial docs",
+    description:
+      "Accelerates Vision-Language Models for financial document processing through intelligent routing and early-exit strategies, cutting cost by 96% while preserving accuracy.",
+    tech: ["Python", "PyTorch", "MoE", "VLM", "Early Exit", "Streamlit"],
+    metrics: [
+      { label: "Throughput", value: "3.5x" },
+      { label: "Cost reduction", value: "96%" },
+      { label: "Latency", value: "~250ms" },
+    ],
+    github: "https://github.com/aneeshjayan",
+  },
+  {
+    name: "LLM Probing",
+    blurb: "Mechanistic interpretability across transformer layers",
+    description:
+      "Mechanistic interpretability study examining how a 3B-parameter language model encodes behavioral instructions across its layers using linear probes and PCA-based analysis.",
+    tech: ["PyTorch", "HuggingFace", "StableLM", "PCA", "Python", "NLP"],
+    metrics: [
+      { label: "Probe accuracy", value: "~100%" },
+      { label: "Model size", value: "3B" },
+      { label: "Method", value: "Linear" },
+    ],
+    github: "https://github.com/aneeshjayan",
+  },
+  {
+    name: "AI Video Editor Agent",
+    blurb: "Multi-agent video editing via natural language",
+    description:
+      "Multi-agent system automating video editing through natural language instructions. Specialized agents handle audio transcription, scene analysis, and FFmpeg orchestration across three pipeline modes.",
+    tech: ["CrewAI", "GPT-4o", "Whisper", "FFmpeg", "FastAPI", "Ollama"],
+    metrics: [
+      { label: "Agents", value: "6" },
+      { label: "Pipeline modes", value: "3" },
+      { label: "Interface", value: "NL" },
+    ],
+    github: "https://github.com/aneeshjayan",
+  },
+  {
+    name: "FinSLM",
+    blurb: "Domain-adapted financial language model",
+    description:
+      "Mistral-7B fine-tuned on SEC filings and financial news via QLoRA for consumer-grade deployment. Benchmarked against full fine-tuning across 20+ companies with W&B tracking.",
+    tech: ["Mistral-7B", "LoRA", "QLoRA", "SEC EDGAR", "W&B", "Python"],
+    metrics: [
+      { label: "LoRA vs full", value: "98%" },
+      { label: "Min VRAM", value: "2–3 GB" },
+      { label: "Companies", value: "20+" },
+    ],
+    github: "https://github.com/aneeshjayan",
+  },
+  {
+    name: "FocusMate",
+    blurb: "ADHD-focused AI co-pilot for executive function",
+    description:
+      "AI productivity co-pilot that ingests Gmail, Google Calendar, and voice notes via OAuth2, then surfaces prioritized tasks and daily schedules — built for users with executive function challenges.",
+    tech: ["FastAPI", "React", "Vite", "Expo", "Gmail API", "Google OAuth2"],
+    metrics: [
+      { label: "REST endpoints", value: "6+" },
+      { label: "Services", value: "2" },
+      { label: "Platforms", value: "Web+Mobile" },
+    ],
+    github: "https://github.com/aneeshjayan",
+  },
+  {
+    name: "VoiceGuardAI",
+    blurb: "RL-powered voice deepfake & spoofing detector",
+    description:
+      "Real-time voice authenticity system trained with reinforcement learning — reward signals shaped by false-accept rate and adversarial robustness. Detects TTS spoofing, voice conversion, and replay attacks across noisy environments with sub-50ms latency.",
+    tech: ["PyTorch", "PPO", "RLHF", "Wav2Vec2", "ONNX", "FastAPI"],
+    metrics: [
+      { label: "EER", value: "1.8%" },
+      { label: "Latency", value: "<50ms" },
+      { label: "Attack types", value: "6" },
+    ],
+    github: "https://github.com/aneeshjayan",
+  },
+  {
+    name: "Insurance SLM Agent",
+    blurb: "Production-grade insurance agent with full RLHF pipeline",
+    description:
+      "Multi-agent insurance assistant built on a domain-fine-tuned SLM with a complete RLHF training pipeline (SFT → Bradley-Terry Reward Model → GRPO → DPO). Handles FNOL filing, policy Q&A via RAG, competitor research via web agents, and human escalation — all routed through a LangGraph state machine with compliance guardrails.",
+    tech: ["LangGraph", "GRPO", "DPO", "LoRA", "RAG", "FastAPI", "Tavily"],
+    metrics: [
+      { label: "Agents", value: "5" },
+      { label: "RLHF phases", value: "4" },
+      { label: "VRAM", value: "~40GB" },
+    ],
+    github: "https://github.com/aneeshjayan",
+  },
 ];
 
 function ProjectsPage() {
@@ -92,7 +183,7 @@ function ProjectsPage() {
           >
             <div className="mb-3 flex items-center justify-between">
               <span className="font-mono text-xs text-muted-foreground">
-                0{i + 1} / 0{projects.length}
+                {String(i + 1).padStart(2, "0")} / {String(projects.length).padStart(2, "0")}
               </span>
               <div className="flex items-center gap-2">
                 {p.github && (
