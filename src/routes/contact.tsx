@@ -26,14 +26,14 @@ const channels = [
   {
     icon: Mail,
     label: "Email",
-    value: "aneeshjayan9@gmail.com",
-    href: "mailto:aneeshjayan9@gmail.com",
+    value: "aneeshjayan11@gmail.com",
+    href: "mailto:aneeshjayan11@gmail.com",
   },
   {
     icon: Phone,
     label: "Phone",
-    value: "+1 (480) 000-0000",
-    href: "tel:+14800000000",
+    value: "+1 (602) 768-6622",
+    href: "tel:+16027686622",
   },
   {
     icon: Linkedin,
@@ -64,7 +64,7 @@ function ContactPage() {
     const body = encodeURIComponent(
       `${data.get("message")}\n\n— ${data.get("name")} (${data.get("email")})`,
     );
-    window.location.href = `mailto:aneeshjayan9@gmail.com?subject=${subject}&body=${body}`;
+    window.location.href = `mailto:aneeshjayan11@gmail.com?subject=${subject}&body=${body}`;
     setSent(true);
   }
 

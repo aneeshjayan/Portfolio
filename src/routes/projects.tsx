@@ -1,6 +1,7 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { Github, ExternalLink } from "lucide-react";
+import { Github, ExternalLink, Brain, Network, Heart, Zap, Search, Video, TrendingUp, CalendarCheck, Mic, FileText } from "lucide-react";
 import { PageHeader } from "@/components/SectionTag";
+import type { LucideIcon } from "lucide-react";
 
 export const Route = createFileRoute("/projects")({
   head: () => ({
@@ -28,6 +29,8 @@ type Project = {
   description: string;
   tech: string[];
   metrics: { label: string; value: string }[];
+  icon: LucideIcon;
+  iconColor: string;
   github?: string;
   link?: string;
 };
@@ -35,6 +38,8 @@ type Project = {
 const projects: Project[] = [
   {
     name: "Optimal-SLM",
+    icon: Brain,
+    iconColor: "oklch(0.82 0.15 200)",
     blurb: "RL-tuned small language model for reasoning",
     description:
       "Trained a compact (<1B param) language model with reinforcement learning from preference data to match much larger models on multi-step reasoning benchmarks. Custom reward modeling, PPO loop, and evaluation harness.",
@@ -48,32 +53,38 @@ const projects: Project[] = [
   },
   {
     name: "FraudGNN",
-    blurb: "Graph neural network for transaction fraud",
+    icon: Network,
+    iconColor: "oklch(0.72 0.18 295)",
+    blurb: "Production graph-based fraud detection system",
     description:
-      "Built a heterogeneous graph neural network over millions of card-merchant-device edges to detect fraud rings invisible to tabular models. Productionized with mini-batch neighbor sampling and online inference.",
-    tech: ["PyTorch Geometric", "GraphSAGE", "Neo4j", "FastAPI", "Docker"],
+      "Production-grade fraud detection pipeline on Elliptic Bitcoin and IEEE-CIS datasets combining GraphSAGE/GAT on Neo4j transaction graphs, LSTM temporal modeling, and XGBoost ensemble with SMOTE balancing. Containerized with Docker and SHAP explainability for auditable per-decision outputs.",
+    tech: ["GraphSAGE", "GAT", "Neo4j", "LSTM", "XGBoost", "SHAP", "Docker"],
     metrics: [
       { label: "F1", value: "0.91" },
-      { label: "Recall@1%", value: "0.84" },
-      { label: "Latency", value: "<60ms" },
+      { label: "AUC-ROC", value: "0.97" },
+      { label: "FP reduction", value: "30%" },
     ],
     github: "https://github.com/aneeshjayan",
   },
   {
     name: "TrustMedAI",
-    blurb: "Calibrated diagnostic assistant for clinicians",
+    icon: Heart,
+    iconColor: "oklch(0.75 0.19 15)",
+    blurb: "Medical conversational agent for Type-2 Diabetes",
     description:
-      "Multimodal medical AI assistant that grounds answers in retrieved clinical literature and reports calibrated uncertainty alongside every prediction. Designed with clinician-in-the-loop evaluation.",
-    tech: ["LangChain", "RAG", "Llama 3", "FAISS", "Streamlit", "AWS"],
+      "Semantic retrieval system processing 500+ forum threads and 16,000 lines of clinical guidelines from ADA, Mayo Clinic, and NIH using MiniLM embeddings. Production RAG pipeline with FAISS achieving 0.970 faithfulness. React-based multimodal interface with speech-to-text and citation-backed responses.",
+    tech: ["RAG", "FAISS", "MiniLM", "React", "Speech-to-Text", "Python"],
     metrics: [
-      { label: "ECE", value: "0.04" },
-      { label: "Hallucination ↓", value: "-37%" },
-      { label: "Sources", value: "PubMed" },
+      { label: "Faithfulness", value: "0.970" },
+      { label: "Precision", value: "0.950" },
+      { label: "BERTScore", value: "0.930" },
     ],
     github: "https://github.com/aneeshjayan",
   },
   {
     name: "VLM Speedup: LexFin Guard",
+    icon: Zap,
+    iconColor: "oklch(0.82 0.18 85)",
     blurb: "Vision-language model acceleration for financial docs",
     description:
       "Accelerates Vision-Language Models for financial document processing through intelligent routing and early-exit strategies, cutting cost by 96% while preserving accuracy.",
@@ -87,6 +98,8 @@ const projects: Project[] = [
   },
   {
     name: "LLM Probing",
+    icon: Search,
+    iconColor: "oklch(0.78 0.17 160)",
     blurb: "Mechanistic interpretability across transformer layers",
     description:
       "Mechanistic interpretability study examining how a 3B-parameter language model encodes behavioral instructions across its layers using linear probes and PCA-based analysis.",
@@ -100,6 +113,8 @@ const projects: Project[] = [
   },
   {
     name: "AI Video Editor Agent",
+    icon: Video,
+    iconColor: "oklch(0.72 0.18 295)",
     blurb: "Multi-agent video editing via natural language",
     description:
       "Multi-agent system automating video editing through natural language instructions. Specialized agents handle audio transcription, scene analysis, and FFmpeg orchestration across three pipeline modes.",
@@ -113,6 +128,8 @@ const projects: Project[] = [
   },
   {
     name: "FinSLM",
+    icon: TrendingUp,
+    iconColor: "oklch(0.78 0.17 145)",
     blurb: "Domain-adapted financial language model",
     description:
       "Mistral-7B fine-tuned on SEC filings and financial news via QLoRA for consumer-grade deployment. Benchmarked against full fine-tuning across 20+ companies with W&B tracking.",
@@ -126,6 +143,8 @@ const projects: Project[] = [
   },
   {
     name: "FocusMate",
+    icon: CalendarCheck,
+    iconColor: "oklch(0.82 0.15 200)",
     blurb: "ADHD-focused AI co-pilot for executive function",
     description:
       "AI productivity co-pilot that ingests Gmail, Google Calendar, and voice notes via OAuth2, then surfaces prioritized tasks and daily schedules — built for users with executive function challenges.",
@@ -139,19 +158,24 @@ const projects: Project[] = [
   },
   {
     name: "VoiceGuardAI",
-    blurb: "RL-powered voice deepfake & spoofing detector",
+    icon: Mic,
+    iconColor: "oklch(0.75 0.19 15)",
+    blurb: "Prompt injection security middleware for voice agents",
     description:
-      "Real-time voice authenticity system trained with reinforcement learning — reward signals shaped by false-accept rate and adversarial robustness. Detects TTS spoofing, voice conversion, and replay attacks across noisy environments with sub-50ms latency.",
-    tech: ["PyTorch", "PPO", "RLHF", "Wav2Vec2", "ONNX", "FastAPI"],
+      "4-layer real-time injection detection pipeline: Aho-Corasick rule engine (p99 <1ms), FAISS semantic classifier, PPO routing policy, and async GRPO reasoner — achieving 88% attack recall across 6 threat classes including jailbreak, tool hijacking, and data exfiltration. Deployed on AWS EC2 at voiceguardlm.store.",
+    tech: ["PPO", "GRPO", "FAISS", "Redis", "FastAPI", "Docker", "AWS EC2"],
     metrics: [
-      { label: "EER", value: "1.8%" },
-      { label: "Latency", value: "<50ms" },
-      { label: "Attack types", value: "6" },
+      { label: "Attack recall", value: "88%" },
+      { label: "Latency p99", value: "<50ms" },
+      { label: "Threat classes", value: "6" },
     ],
     github: "https://github.com/aneeshjayan",
+    link: "https://voiceguardlm.store",
   },
   {
     name: "Insurance SLM Agent",
+    icon: FileText,
+    iconColor: "oklch(0.82 0.18 85)",
     blurb: "Production-grade insurance agent with full RLHF pipeline",
     description:
       "Multi-agent insurance assistant built on a domain-fine-tuned SLM with a complete RLHF training pipeline (SFT → Bradley-Terry Reward Model → GRPO → DPO). Handles FNOL filing, policy Q&A via RAG, competitor research via web agents, and human escalation — all routed through a LangGraph state machine with compliance guardrails.",
@@ -181,11 +205,18 @@ function ProjectsPage() {
             className="group relative flex flex-col overflow-hidden rounded-xl border border-border bg-card/60 p-6 backdrop-blur transition-all duration-300 hover:-translate-y-1 hover:border-primary/40 hover:bg-card/80 card-elevated animate-fade-in-up"
             style={{ animationDelay: `${i * 80}ms` }}
           >
-            <div className="mb-3 flex items-center justify-between">
-              <span className="font-mono text-xs text-muted-foreground">
-                {String(i + 1).padStart(2, "0")} / {String(projects.length).padStart(2, "0")}
-              </span>
-              <div className="flex items-center gap-2">
+            {/* Icon + links row */}
+            <div className="mb-4 flex items-start justify-between">
+              <div
+                className="rounded-lg p-2.5"
+                style={{ background: `color-mix(in oklab, ${p.iconColor} 15%, transparent)`, border: `1px solid color-mix(in oklab, ${p.iconColor} 30%, transparent)` }}
+              >
+                <p.icon className="size-5" style={{ color: p.iconColor }} />
+              </div>
+              <div className="flex items-center gap-2 pt-0.5">
+                <span className="font-mono text-xs text-muted-foreground">
+                  {String(i + 1).padStart(2, "0")} / {String(projects.length).padStart(2, "0")}
+                </span>
                 {p.github && (
                   <a
                     href={p.github}

@@ -1,6 +1,5 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { PageHeader } from "@/components/SectionTag";
-import { GraduationCap } from "lucide-react";
 
 export const Route = createFileRoute("/education")({
   head: () => ({
@@ -24,21 +23,32 @@ export const Route = createFileRoute("/education")({
 const degrees = [
   {
     school: "Arizona State University",
-    degree: "M.S. Data Science",
-    period: "2024 – 2026 · Tempe, AZ",
+    shortName: "ASU",
+    logo: "/asu.jpg",
+    degree: "M.S. Data Science, Analytics & Engineering",
+    period: "2024 – 2026",
+    location: "Tempe, AZ",
+    gpa: "In Progress",
+    highlight: "Ira A. Fulton Schools of Engineering",
     courses: [
+      "Statistics for Data Analysts",
+      "Data Processing At Scale",
       "Statistical Machine Learning",
-      "Deep Learning",
-      "Natural Language Processing",
       "Data Mining",
-      "Knowledge Representation",
-      "Big Data Systems",
+      "Knowledge Representation & Reasoning",
+      "Computing for Data-Driven Optimization",
+      "Semantic Web Mining",
     ],
   },
   {
     school: "Vellore Institute of Technology",
+    shortName: "VIT",
+    logo: "/vit.jpg",
     degree: "B.Tech Electronics & Communication Engineering",
-    period: "2020 – 2024 · Vellore, India",
+    period: "2020 – 2024",
+    location: "Chennai, India",
+    gpa: "8.5 / 10",
+    highlight: "School of Electronics Engineering",
     courses: [
       "Probability & Statistics",
       "Linear Algebra",
@@ -63,26 +73,43 @@ function EducationPage() {
         {degrees.map((d, i) => (
           <div
             key={d.school}
-            className="rounded-xl border border-border bg-card/60 p-6 backdrop-blur card-elevated animate-fade-in-up"
-            style={{ animationDelay: `${i * 80}ms` }}
+            className="flex flex-col overflow-hidden rounded-xl border border-border bg-card/60 backdrop-blur card-elevated animate-fade-in-up transition-all duration-300 hover:border-primary/30 hover:bg-card/80"
+            style={{ animationDelay: `${i * 100}ms` }}
           >
-            <div className="flex items-start gap-3">
-              <div className="rounded-lg border border-border bg-secondary/60 p-2.5">
-                <GraduationCap className="size-5 text-primary" />
+            {/* Logo banner */}
+            <div className="flex items-center gap-4 border-b border-border/60 bg-secondary/30 px-6 py-5">
+              <div className="shrink-0 overflow-hidden rounded-lg border border-border bg-background/60 p-1.5">
+                <img
+                  src={d.logo}
+                  alt={d.school}
+                  className="h-14 w-14 object-contain"
+                  onError={(e) => { (e.target as HTMLImageElement).style.display = "none"; }}
+                />
               </div>
-              <div>
-                <h2 className="text-lg font-semibold">
+              <div className="min-w-0">
+                <h2 className="text-lg font-semibold leading-tight">
                   <span className="text-gradient">{d.school}</span>
                 </h2>
-                <p className="text-sm text-foreground/90">{d.degree}</p>
-                <p className="font-mono text-xs text-muted-foreground">
-                  {d.period}
-                </p>
+                <p className="text-sm text-foreground/80">{d.degree}</p>
+                <p className="font-mono text-xs text-muted-foreground">{d.highlight}</p>
               </div>
             </div>
 
-            <div className="mt-5">
-              <p className="mb-2 font-mono text-xs uppercase tracking-wider text-muted-foreground">
+            {/* Details */}
+            <div className="flex-1 p-6">
+              <div className="mb-5 flex flex-wrap gap-2">
+                <span className="flex items-center gap-1.5 rounded-md border border-border bg-secondary/50 px-2.5 py-1 font-mono text-xs text-muted-foreground">
+                  📅 {d.period}
+                </span>
+                <span className="flex items-center gap-1.5 rounded-md border border-border bg-secondary/50 px-2.5 py-1 font-mono text-xs text-muted-foreground">
+                  📍 {d.location}
+                </span>
+                <span className="flex items-center gap-1.5 rounded-md border border-primary/30 bg-primary/10 px-2.5 py-1 font-mono text-xs text-primary">
+                  GPA {d.gpa}
+                </span>
+              </div>
+
+              <p className="mb-2.5 font-mono text-xs uppercase tracking-wider text-muted-foreground">
                 relevant coursework
               </p>
               <div className="flex flex-wrap gap-1.5">

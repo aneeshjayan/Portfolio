@@ -25,7 +25,8 @@ function HomePage() {
   return (
     <section className="relative">
       <div className="mx-auto flex min-h-[calc(100vh-65px)] max-w-6xl flex-col justify-center px-6 py-20">
-        <div className="animate-fade-in-up">
+        <div className="flex items-center gap-16">
+        <div className="flex-1 animate-fade-in-up">
           <div className="mb-6 inline-flex items-center gap-2 rounded-full border border-border bg-card/50 px-3 py-1 backdrop-blur">
             <span className="relative flex h-2 w-2">
               <span className="absolute inline-flex h-full w-full animate-pulse-dot rounded-full bg-emerald-400 opacity-75" />
@@ -89,7 +90,7 @@ function HomePage() {
           </div>
 
           {/* Code preview card */}
-          <div className="mt-16 max-w-2xl overflow-hidden rounded-xl border border-border bg-card/70 backdrop-blur card-elevated">
+          <div className="mt-12 max-w-2xl overflow-hidden rounded-xl border border-border bg-card/70 backdrop-blur card-elevated">
             <div className="flex items-center gap-2 border-b border-border bg-secondary/40 px-4 py-2.5">
               <span className="size-2.5 rounded-full bg-red-500/70" />
               <span className="size-2.5 rounded-full bg-yellow-500/70" />
@@ -114,8 +115,27 @@ function HomePage() {
           </div>
         </div>
 
-        <div className="mt-16 flex justify-center">
+        <div className="mt-12 flex justify-center">
           <ChevronDown className="size-5 animate-float text-muted-foreground" />
+        </div>
+        </div>
+
+        {/* Profile photo — hidden on small screens */}
+        <div className="hidden lg:flex shrink-0 flex-col items-center gap-4 animate-fade-in-up" style={{ animationDelay: "200ms" }}>
+          <div
+            className="relative h-72 w-72 overflow-hidden rounded-2xl border border-primary/30"
+            style={{ boxShadow: "0 0 60px oklch(0.82 0.15 200 / 0.2), 0 0 0 8px oklch(0.82 0.15 200 / 0.06)" }}
+          >
+            <img
+              src="/profile.png"
+              alt="Aneesh Jayan Prabhu"
+              className="h-full w-full object-cover"
+            />
+            <div className="absolute inset-0" style={{ background: "linear-gradient(to top, var(--background) 0%, transparent 40%)" }} />
+          </div>
+          <div className="text-center">
+            <div className="font-mono text-xs text-muted-foreground">Tempe, AZ · ASU</div>
+          </div>
         </div>
       </div>
     </section>

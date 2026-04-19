@@ -8,13 +8,13 @@ export const Route = createFileRoute("/skills")({
       {
         name: "description",
         content:
-          "Technical skills: Python, PyTorch, LLMs, RAG, agents, GNNs, AWS, Docker, Postgres, and more.",
+          "Full technical skill set: Python, PyTorch, LangGraph, RAG, Agents, GNNs, CUDA, FastAPI, AWS, and more.",
       },
       { property: "og:title", content: "Skills — Aneesh Jayan Prabhu" },
       {
         property: "og:description",
         content:
-          "A grouped overview of languages, ML frameworks, AI/GenAI, infra, data, cloud, and visualization tools.",
+          "Languages, ML frameworks, AI/GenAI, infrastructure, data engineering, cloud, databases, and visualization tools.",
       },
     ],
   }),
@@ -24,35 +24,61 @@ export const Route = createFileRoute("/skills")({
 const groups: { title: string; items: string[] }[] = [
   {
     title: "Languages",
-    items: ["Python", "TypeScript", "SQL", "C++", "Bash", "R"],
+    items: ["Python", "SQL", "R", "C", "C++", "MATLAB"],
   },
   {
-    title: "ML Frameworks",
-    items: ["PyTorch", "TensorFlow", "scikit-learn", "XGBoost", "PyTorch Geometric", "Hugging Face"],
+    title: "ML Frameworks & Tools",
+    items: [
+      "PyTorch", "TensorFlow", "Scikit-Learn", "OpenCV",
+      "LoRA / QLoRA", "PEFT", "Hugging Face Transformers",
+      "MLflow", "Dataiku", "XGBoost",
+    ],
   },
   {
-    title: "AI / GenAI",
-    items: ["LLMs", "RAG", "Agents", "LangChain", "LlamaIndex", "vLLM", "LoRA / PEFT", "TRL / RLHF"],
+    title: "AI & GenAI",
+    items: [
+      "LangChain", "LangGraph", "Model Context Protocol (MCP)",
+      "Agentic AI Systems", "RAG Pipelines", "FAISS", "Neo4j Vector",
+      "Prompt Engineering", "Guardrails & Inference Pipelines",
+      "Semantic Search", "TRL / RLHF", "vLLM",
+    ],
   },
   {
-    title: "Infrastructure",
-    items: ["Docker", "Kubernetes", "FastAPI", "Airflow", "MLflow", "Ray"],
+    title: "AI Infrastructure",
+    items: [
+      "CUDA", "TensorRT", "Docker", "AWS SageMaker",
+      "Databricks", "GPU Workload Optimization",
+      "CI/CD (Azure DevOps, GitHub Actions)", "MLOps",
+    ],
   },
   {
     title: "Data Engineering",
-    items: ["Spark", "Pandas", "Polars", "dbt", "Kafka"],
+    items: [
+      "ETL", "PySpark", "Kafka", "Airflow", "Hadoop",
+      "Data Ingestion Pipelines", "Benchmarking & Observability", "Grafana",
+    ],
   },
   {
-    title: "Cloud",
-    items: ["AWS", "GCP", "Azure", "Cloudflare"],
+    title: "Cloud & DevOps",
+    items: [
+      "AWS (Lambda, S3, SageMaker)", "Azure DevOps",
+      "Google Cloud SQL", "Docker", "Git", "CI/CD",
+    ],
+  },
+  {
+    title: "APIs & Services",
+    items: [
+      "FastAPI", "Microsoft Graph API", "Exchange API",
+      "Power Automate", "Google OAuth2", "REST APIs",
+    ],
   },
   {
     title: "Databases",
-    items: ["PostgreSQL", "MongoDB", "Neo4j", "Redis", "Pinecone", "FAISS"],
+    items: ["MySQL", "PostgreSQL", "MongoDB", "Neo4j", "FAISS", "Redis"],
   },
   {
-    title: "Visualization",
-    items: ["Plotly", "Matplotlib", "Seaborn", "Tableau", "Power BI"],
+    title: "Visualization & Frontend",
+    items: ["React", "Streamlit", "Power BI", "Matplotlib", "Seaborn", "Plotly"],
   },
 ];
 
@@ -65,12 +91,12 @@ function SkillsPage() {
         description="Tools I reach for when building, shipping, and measuring intelligent systems."
       />
 
-      <div className="mt-12 grid gap-6 md:grid-cols-2">
+      <div className="mt-12 grid gap-5 md:grid-cols-2 lg:grid-cols-3">
         {groups.map((g, i) => (
           <div
             key={g.title}
-            className="rounded-xl border border-border bg-card/60 p-6 backdrop-blur card-elevated animate-fade-in-up"
-            style={{ animationDelay: `${i * 60}ms` }}
+            className="rounded-xl border border-border bg-card/60 p-6 backdrop-blur card-elevated animate-fade-in-up transition-all duration-300 hover:border-primary/30"
+            style={{ animationDelay: `${i * 55}ms` }}
           >
             <div className="mb-4 flex items-center gap-2">
               <span className="font-mono text-xs text-muted-foreground">
@@ -80,11 +106,11 @@ function SkillsPage() {
                 <span className="text-gradient">{g.title}</span>
               </h2>
             </div>
-            <div className="flex flex-wrap gap-2">
+            <div className="flex flex-wrap gap-1.5">
               {g.items.map((it) => (
                 <span
                   key={it}
-                  className="rounded-md border border-border/60 bg-secondary/40 px-2.5 py-1 font-mono text-xs text-foreground/90 transition-colors hover:border-primary/50 hover:text-foreground"
+                  className="rounded-md border border-border/60 bg-secondary/40 px-2.5 py-1 font-mono text-xs text-foreground/90 transition-colors hover:border-primary/50 hover:bg-primary/10 hover:text-primary"
                 >
                   {it}
                 </span>
