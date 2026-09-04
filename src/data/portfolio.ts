@@ -318,6 +318,7 @@ export interface Role {
   period: string;
   color: string;
   glyph: string;
+  logo?: string;
   start: number;
   end: number;
   bullets: string[];
@@ -332,6 +333,7 @@ export const ROLES: Role[] = [
     period: "May 2026 — Present",
     color: ACCENT.inference,
     glyph: "R",
+    logo: "/revmo-icon.svg",
     start: 2026.33,
     end: 2026.75,
     bullets: [
@@ -360,6 +362,7 @@ export const ROLES: Role[] = [
     period: "May 2025 — Dec 2025",
     color: ACCENT.agents,
     glyph: "WK",
+    logo: "/wk-mark.svg",
     start: 2025.33,
     end: 2025.99,
     bullets: [
@@ -377,6 +380,7 @@ export const ROLES: Role[] = [
     period: "May 2023 — May 2024",
     color: ACCENT.research,
     glyph: "VIT",
+    logo: "/vit-seal.png",
     start: 2023.33,
     end: 2024.33,
     bullets: [

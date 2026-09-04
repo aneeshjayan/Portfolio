@@ -88,7 +88,15 @@ function ExperiencePage() {
                   overflow: "hidden",
                 }}
               >
-                <span style={{ fontSize: 13, fontWeight: 700, color: r.color }}>{r.glyph}</span>
+                {r.logo ? (
+                  <img
+                    src={r.logo}
+                    alt={r.company}
+                    style={{ height: "100%", width: "100%", objectFit: "contain", padding: 3 }}
+                  />
+                ) : (
+                  <span style={{ fontSize: 13, fontWeight: 700, color: r.color }}>{r.glyph}</span>
+                )}
               </div>
               <div style={{ flex: "1 1 240px" }}>
                 <div style={{ fontSize: 14.5, fontWeight: 700, color: "oklch(0.94 0.02 160)" }}>
