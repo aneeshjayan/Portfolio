@@ -1,7 +1,7 @@
-import { createFileRoute } from "@tanstack/react-router";
 import { useState } from "react";
-import { Mail, MapPin, Phone, Github, Linkedin, Send } from "lucide-react";
-import { PageHeader, SectionTag } from "@/components/SectionTag";
+import { createFileRoute } from "@tanstack/react-router";
+import { EMAIL } from "@/data/portfolio";
+import { useScrollReveal } from "@/hooks/useScrollReveal";
 
 export const Route = createFileRoute("/contact")({
   head: () => ({
@@ -9,185 +9,137 @@ export const Route = createFileRoute("/contact")({
       { title: "Contact — Aneesh Jayan Prabhu" },
       {
         name: "description",
-        content:
-          "Reach Aneesh Jayan Prabhu — email, phone, LinkedIn, GitHub. Based in Tempe, Arizona.",
+        content: "Get in touch with Aneesh Jayan Prabhu — email, LinkedIn, or GitHub.",
       },
       { property: "og:title", content: "Contact — Aneesh Jayan Prabhu" },
-      {
-        property: "og:description",
-        content: "Get in touch via email, LinkedIn, or the contact form.",
-      },
     ],
   }),
   component: ContactPage,
 });
 
-const channels = [
-  {
-    icon: Mail,
-    label: "Email",
-    value: "aneeshjayan11@gmail.com",
-    href: "mailto:aneeshjayan11@gmail.com",
-  },
-  {
-    icon: Phone,
-    label: "Phone",
-    value: "+1 (602) 768-6622",
-    href: "tel:+16027686622",
-  },
-  {
-    icon: Linkedin,
-    label: "LinkedIn",
-    value: "linkedin.com/in/aneeshjayan",
-    href: "https://www.linkedin.com/in/aneeshjayan/",
-  },
-  {
-    icon: Github,
-    label: "GitHub",
-    value: "github.com/aneeshjayan",
-    href: "https://github.com/aneeshjayan",
-  },
-  {
-    icon: MapPin,
-    label: "Location",
-    value: "Tempe, Arizona, USA",
-  },
-];
+const ACCENT = "oklch(0.85 0.19 145)";
 
 function ContactPage() {
-  const [sent, setSent] = useState(false);
+  const ref = useScrollReveal<HTMLDivElement>([]);
+  const [replyTo, setReplyTo] = useState("");
+  const [message, setMessage] = useState("");
 
-  function onSubmit(e: React.FormEvent<HTMLFormElement>) {
-    e.preventDefault();
-    const data = new FormData(e.currentTarget);
-    const subject = encodeURIComponent(`Portfolio contact — ${data.get("name")}`);
-    const body = encodeURIComponent(
-      `${data.get("message")}\n\n— ${data.get("name")} (${data.get("email")})`,
-    );
-    window.location.href = `mailto:aneeshjayan11@gmail.com?subject=${subject}&body=${body}`;
-    setSent(true);
-  }
+  const sendMail = () => {
+    const from = replyTo ? `From: ${replyTo}\n\n` : "";
+    window.location.href = `mailto:${EMAIL}?subject=${encodeURIComponent("Portfolio contact")}&body=${encodeURIComponent(from + message)}`;
+  };
 
   return (
-    <section className="mx-auto max-w-6xl px-6 py-16">
-      <PageHeader
-        tag="contact"
-        title="Get in touch"
-        description="I'm open to AI/ML roles, collaborations, and interesting research conversations."
-      />
+    <div ref={ref} style={{ animation: "dc-boot-in 0.4s ease-out both" }}>
+      <p style={{ margin: 0, fontSize: 12, color: "oklch(0.5 0.02 200)" }}>
+        <span style={{ color: ACCENT }}>$</span> mail -s "hello" aneesh
+      </p>
+      <h2
+        style={{
+          margin: "14px 0 4px",
+          fontSize: 26,
+          fontWeight: 700,
+          color: "oklch(0.94 0.02 160)",
+        }}
+      >
+        // contact
+      </h2>
+      <p style={{ margin: 0, fontSize: 12.5, color: "oklch(0.6 0.02 200)" }}>
+        Write below and hit send — it opens your mail client with the message addressed to me.
+      </p>
 
-      <div className="mt-12 grid gap-8 lg:grid-cols-5">
-        {/* Channels */}
-        <div className="lg:col-span-2">
-          <SectionTag>channels</SectionTag>
-          <ul className="space-y-2">
-            {channels.map(({ icon: Icon, label, value, href }) => {
-              const inner = (
-                <div className="flex items-center gap-3 rounded-xl border border-border bg-card/60 p-4 backdrop-blur transition-colors hover:border-primary/40 hover:bg-card/80">
-                  <div className="rounded-md border border-border bg-secondary/60 p-2">
-                    <Icon className="size-4 text-primary" />
-                  </div>
-                  <div className="min-w-0">
-                    <div className="font-mono text-xs uppercase tracking-wider text-muted-foreground">
-                      {label}
-                    </div>
-                    <div className="truncate text-sm">{value}</div>
-                  </div>
-                </div>
-              );
-              return (
-                <li key={label}>
-                  {href ? (
-                    <a href={href} target="_blank" rel="noreferrer">
-                      {inner}
-                    </a>
-                  ) : (
-                    inner
-                  )}
-                </li>
-              );
-            })}
-          </ul>
+      <div
+        style={{
+          marginTop: 20,
+          maxWidth: 620,
+          border: "1px solid oklch(0.32 0.03 190 / 0.4)",
+          background: "oklch(0.09 0.012 235 / 0.7)",
+        }}
+      >
+        <div
+          style={{
+            borderBottom: "1px solid oklch(0.32 0.03 190 / 0.3)",
+            padding: "8px 14px",
+            fontSize: 10.5,
+            color: "oklch(0.5 0.02 200)",
+          }}
+        >
+          compose — {EMAIL}
         </div>
-
-        {/* Form */}
-        <div className="lg:col-span-3">
-          <SectionTag>send a message</SectionTag>
-          <form
-            onSubmit={onSubmit}
-            className="space-y-4 rounded-xl border border-border bg-card/60 p-6 backdrop-blur card-elevated"
+        <div style={{ padding: 18, display: "flex", flexDirection: "column", gap: 14 }}>
+          <label style={{ display: "flex", flexDirection: "column", gap: 5 }}>
+            <span style={{ fontSize: 10.5, color: "oklch(0.55 0.02 200)" }}>from:</span>
+            <input
+              type="email"
+              value={replyTo}
+              onChange={(e) => setReplyTo(e.target.value)}
+              placeholder="you@company.com"
+              style={{
+                border: "1px solid oklch(0.32 0.03 190 / 0.45)",
+                background: "#04070a",
+                padding: "9px 11px",
+                fontFamily: "'JetBrains Mono', monospace",
+                fontSize: 12.5,
+                color: "oklch(0.9 0.02 160)",
+                outline: "none",
+              }}
+            />
+          </label>
+          <label style={{ display: "flex", flexDirection: "column", gap: 5 }}>
+            <span style={{ fontSize: 10.5, color: "oklch(0.55 0.02 200)" }}>body:</span>
+            <textarea
+              value={message}
+              onChange={(e) => setMessage(e.target.value)}
+              rows={6}
+              placeholder="what are you building?"
+              style={{
+                resize: "vertical",
+                border: "1px solid oklch(0.32 0.03 190 / 0.45)",
+                background: "#04070a",
+                padding: "9px 11px",
+                fontFamily: "'JetBrains Mono', monospace",
+                fontSize: 12.5,
+                lineHeight: 1.7,
+                color: "oklch(0.9 0.02 160)",
+                outline: "none",
+              }}
+            />
+          </label>
+          <button
+            onClick={sendMail}
+            style={{
+              alignSelf: "flex-start",
+              border: "1px solid oklch(0.85 0.19 145 / 0.4)",
+              background: "oklch(0.85 0.19 145 / 0.12)",
+              padding: "10px 18px",
+              fontFamily: "'JetBrains Mono', monospace",
+              fontSize: 12.5,
+              fontWeight: 600,
+              color: ACCENT,
+              cursor: "pointer",
+            }}
           >
-            <div className="grid gap-4 sm:grid-cols-2">
-              <Field name="name" label="Name" placeholder="Ada Lovelace" required />
-              <Field
-                name="email"
-                label="Email"
-                type="email"
-                placeholder="ada@example.com"
-                required
-              />
-            </div>
-            <div>
-              <label className="mb-1.5 block font-mono text-xs uppercase tracking-wider text-muted-foreground">
-                Message
-              </label>
-              <textarea
-                name="message"
-                required
-                rows={6}
-                placeholder="What are you building?"
-                className="w-full resize-none rounded-md border border-border bg-background/60 px-3 py-2 text-sm text-foreground placeholder:text-muted-foreground/60 focus:border-primary focus:outline-none focus:ring-1 focus:ring-ring"
-              />
-            </div>
-
-            <div className="flex items-center justify-between gap-4">
-              <p className="font-mono text-xs text-muted-foreground">
-                {sent ? (
-                  <span className="text-emerald-400">$ message dispatched ✓</span>
-                ) : (
-                  <>$ awaiting input...</>
-                )}
-              </p>
-              <button
-                type="submit"
-                className="inline-flex items-center gap-2 rounded-lg bg-gradient-brand px-4 py-2 text-sm font-medium text-background transition-transform hover:-translate-y-0.5 glow"
-              >
-                Send
-                <Send className="size-4" />
-              </button>
-            </div>
-          </form>
+            send ↵
+          </button>
         </div>
       </div>
-    </section>
-  );
-}
 
-function Field({
-  name,
-  label,
-  type = "text",
-  placeholder,
-  required,
-}: {
-  name: string;
-  label: string;
-  type?: string;
-  placeholder?: string;
-  required?: boolean;
-}) {
-  return (
-    <div>
-      <label className="mb-1.5 block font-mono text-xs uppercase tracking-wider text-muted-foreground">
-        {label}
-      </label>
-      <input
-        name={name}
-        type={type}
-        placeholder={placeholder}
-        required={required}
-        className="w-full rounded-md border border-border bg-background/60 px-3 py-2 text-sm text-foreground placeholder:text-muted-foreground/60 focus:border-primary focus:outline-none focus:ring-1 focus:ring-ring"
-      />
+      <div
+        style={{
+          marginTop: 20,
+          display: "flex",
+          flexWrap: "wrap",
+          gap: 10,
+          fontSize: 11.5,
+          color: "oklch(0.6 0.02 200)",
+        }}
+      >
+        <span>{EMAIL}</span>
+        <span style={{ color: "oklch(0.4 0.02 200)" }}>·</span>
+        <span>(602) 768-6622</span>
+        <span style={{ color: "oklch(0.4 0.02 200)" }}>·</span>
+        <span>Tempe, Arizona</span>
+      </div>
     </div>
   );
 }

@@ -1,0 +1,55 @@
+@keyframes dc-flicker {
+  0%,
+  100% {
+    opacity: 0.035;
+  }
+  50% {
+    opacity: 0.055;
+  }
+}
+@keyframes dc-glow-pulse {
+  0%,
+  100% {
+    opacity: 0.5;
+  }
+  50% {
+    opacity: 1;
+  }
+}
+@keyframes dc-boot-in {
+  from {
+    opacity: 0;
+    transform: translateY(6px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+@keyframes dc-dash {
+  to {
+    stroke-dashoffset: -20;
+  }
+}
+
+.term-shell-grid {
+  display: grid;
+  grid-template-columns: 258px 1fr;
+  min-height: 720px;
+}
+.term-two-col {
+  display: grid;
+  grid-template-columns: minmax(0, 1.3fr) minmax(0, 1fr);
+  gap: 16px;
+  align-items: start;
+}
+
+@media (max-width: 860px) {
+  .term-shell-grid {
+    grid-template-columns: 1fr;
+    min-height: auto;
+  }
+  .term-two-col {
+    grid-template-columns: 1fr;
+  }
+}

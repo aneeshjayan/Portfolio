@@ -1,46 +1,46 @@
-import { Outlet, Link, createRootRoute } from "@tanstack/react-router";
-import { Nav } from "@/components/Nav";
-import { Footer } from "@/components/Footer";
-import { MathBackground } from "@/components/MathBackground";
+import { Link, createRootRoute } from "@tanstack/react-router";
+import { TerminalWindow } from "@/components/terminal/TerminalWindow";
 
 function NotFoundComponent() {
   return (
-    <div className="flex min-h-screen items-center justify-center px-4">
-      <div className="max-w-md text-center">
-        <h1 className="font-mono text-7xl font-bold text-gradient">404</h1>
-        <h2 className="mt-4 text-xl font-semibold">Page not found</h2>
-        <p className="mt-2 text-sm text-muted-foreground">
-          The route you're looking for doesn't exist.
-        </p>
-        <div className="mt-6">
-          <Link
-            to="/"
-            className="inline-flex items-center justify-center rounded-md border border-border bg-secondary px-4 py-2 font-mono text-sm transition-colors hover:bg-secondary/70"
-          >
-            cd ~/
-          </Link>
-        </div>
-      </div>
+    <div style={{ animation: "dc-boot-in 0.4s ease-out both" }}>
+      <p style={{ margin: 0, fontSize: 12, color: "oklch(0.5 0.02 200)" }}>
+        <span style={{ color: "oklch(0.85 0.19 145)" }}>$</span> cat ~/404
+      </p>
+      <h1
+        style={{
+          margin: "14px 0 4px",
+          fontSize: 26,
+          fontWeight: 700,
+          color: "oklch(0.94 0.02 160)",
+        }}
+      >
+        404: not found
+      </h1>
+      <p style={{ margin: 0, fontSize: 12.5, color: "oklch(0.6 0.02 200)" }}>
+        That path doesn't exist on this filesystem.
+      </p>
+      <Link
+        to="/"
+        style={{
+          marginTop: 20,
+          display: "inline-block",
+          border: "1px solid oklch(0.85 0.19 145 / 0.4)",
+          background: "oklch(0.85 0.19 145 / 0.1)",
+          padding: "8px 14px",
+          fontFamily: "'JetBrains Mono', monospace",
+          fontSize: 12.5,
+          color: "oklch(0.85 0.19 145)",
+          textDecoration: "none",
+        }}
+      >
+        cd ~/
+      </Link>
     </div>
   );
 }
 
 export const Route = createRootRoute({
-  component: RootComponent,
+  component: TerminalWindow,
   notFoundComponent: NotFoundComponent,
 });
-
-function RootComponent() {
-  return (
-    <>
-      <MathBackground />
-      <div className="relative flex min-h-screen flex-col">
-        <Nav />
-        <main className="flex-1">
-          <Outlet />
-        </main>
-        <Footer />
-      </div>
-    </>
-  );
-}
